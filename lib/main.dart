@@ -17,10 +17,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   var questionList = [
-    "1. What is your fav color",
-    "2. What is your fav food",
-    "3. What is your fav game",
+    {
+      'questionText': 'What is your fav color',
+      'answer': ['red', 'black', 'yello', 'blue', 'orange']
+    },
+    {
+      'questionText': 'What is your fav sports',
+      'answer': ['Cricket', 'Fotball', 'Chess', 'hocky']
+    },
   ];
+
   int idx = 0;
   void question() {
     setState(() {
@@ -37,10 +43,10 @@ class _HomePage extends State<HomePage> {
             ),
             body: Column(
               children: [
-                Questions(questionList[idx]),
-                Answer("Green",question),
-                Answer("Mango", question),
-                Answer("Crickage", question)
+                Questions(questionList[idx]['questionText'] as String),
+                ...(questionList[idx]['answer'] as List<String>).map((answer) {
+                  return Answer(question, answer);
+                }).toList()
               ],
             )));
   }
